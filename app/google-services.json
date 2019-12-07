@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "862366136288",
+    "firebase_url": "https://laundrytracker-f8b5d.firebaseio.com",
+    "project_id": "laundrytracker-f8b5d",
+    "storage_bucket": "laundrytracker-f8b5d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862366136288:android:8c9dc6e863ded36e929d85",
+        "android_client_info": {
+          "package_name": "com.parkchanwoo.laundrytracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862366136288-1b1bhtq6c1c1ga31sd8joh15hu7ev64l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBuR6CiG9lNkEuk572FaV0Dych5hiokcI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862366136288-1b1bhtq6c1c1ga31sd8joh15hu7ev64l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
