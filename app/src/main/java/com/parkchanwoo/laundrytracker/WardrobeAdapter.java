@@ -1,5 +1,6 @@
 package com.parkchanwoo.laundrytracker;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,13 +36,22 @@ public class WardrobeAdapter extends RecyclerView.Adapter<WardrobeAdapter.ViewHo
 		return wardrobes.size();
 	}
 
-	public static class ViewHolder extends RecyclerView.ViewHolder {
-
+	public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+		public static final String ADAPTER_POSITION_TAG = "ADAPTER_POSITION";
 		private TextView tvWardrobeName;
 
 		public ViewHolder(@NonNull View itemView) {
 			super(itemView);
 			tvWardrobeName = itemView.findViewById(R.id.tvWardrobeName);
+			itemView.setOnClickListener(this);
+		}
+
+		@Override
+		public void onClick(View v) {
+			Log.i("WardrobeAdapter", "ViewHolder.onClick()");
+			Intent intent = new Intent(v.getContext(), WardrobeActivity.class);
+			intent.putExtra(ADAPTER_POSITION_TAG, getAdapterPosition());
+			v.getContext().startActivity(intent);
 		}
 	}
 }
