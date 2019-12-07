@@ -8,5 +8,7 @@
 		android:id="@+id/tvWardrobeName"
 		android:layout_width="wrap_content"
 		android:layout_height="match_parent"
+		android:gravity="center"
+		android:textSize="@dimen/list_item_wardrobe_text_size"
 		android:text="Wardrobe Name" />
 </LinearLayout>
