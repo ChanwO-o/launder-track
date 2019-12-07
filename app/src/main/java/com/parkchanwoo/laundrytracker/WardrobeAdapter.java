@@ -28,6 +28,7 @@ public class WardrobeAdapter extends RecyclerView.Adapter<WardrobeAdapter.ViewHo
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+		holder.wardrobe = wardrobes.get(position);
 		holder.tvWardrobeName.setText(wardrobes.get(position).getName()); // set text to name of wardrobe at position
 	}
 
@@ -37,7 +38,8 @@ public class WardrobeAdapter extends RecyclerView.Adapter<WardrobeAdapter.ViewHo
 	}
 
 	public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-		public static final String ADAPTER_POSITION_TAG = "ADAPTER_POSITION";
+		public static final String WARDROBE_EXTRA_TAG = "WARDROBE_EXTRA_TAG";
+		private Wardrobe wardrobe;
 		private TextView tvWardrobeName;
 
 		public ViewHolder(@NonNull View itemView) {
@@ -48,9 +50,8 @@ public class WardrobeAdapter extends RecyclerView.Adapter<WardrobeAdapter.ViewHo
 
 		@Override
 		public void onClick(View v) {
-			Log.i("WardrobeAdapter", "ViewHolder.onClick()");
 			Intent intent = new Intent(v.getContext(), WardrobeActivity.class);
-			intent.putExtra(ADAPTER_POSITION_TAG, getAdapterPosition());
+			intent.putExtra(WARDROBE_EXTRA_TAG, wardrobe);
 			v.getContext().startActivity(intent);
 		}
 	}

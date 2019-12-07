@@ -1,8 +1,9 @@
 package com.parkchanwoo.laundrytracker;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Wardrobe {
+public class Wardrobe implements Serializable {
 	private String name;
 	private ArrayList<ClothItem> clothItems;
 
