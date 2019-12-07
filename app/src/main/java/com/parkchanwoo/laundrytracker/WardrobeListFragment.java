@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +44,7 @@ public class WardrobeListFragment extends Fragment {
 		final TextView tvWardrobesCount = getView().findViewById(R.id.tvWardrobesCount);
 		final RecyclerView rvWardrobes = getView().findViewById(R.id.rvWardrobes);
 		rvWardrobes.setLayoutManager(new LinearLayoutManager(getActivity()));
+		rvWardrobes.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
 		wardrobesLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<Wardrobe>>() {
 			@Override
