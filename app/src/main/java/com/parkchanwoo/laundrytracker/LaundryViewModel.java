@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class LaundryViewModel extends ViewModel {
 	private String TAG = this.getClass().getSimpleName();
 	private MutableLiveData<ArrayList<Wardrobe>> wardrobesLiveData;
+	private MutableLiveData<Wardrobe> wardrobeLiveData;
 
 	public LiveData<ArrayList<Wardrobe>> getWardrobesLiveData() {
 		Log.i(TAG, "getWardrobesLiveData()");
@@ -22,8 +23,20 @@ public class LaundryViewModel extends ViewModel {
 	}
 
 	private void initializeWardrobesLiveData() {
-		Log.i(TAG, "initializeWardrobesLiveData()");
 		wardrobesLiveData.setValue(new ArrayList<Wardrobe>());
+	}
+
+	public LiveData<Wardrobe> getWardrobeLiveData() {
+		Log.i(TAG, "getWardrobeLiveData()");
+		if (wardrobeLiveData == null) {
+			wardrobeLiveData = new MutableLiveData<>();
+			initializeWardrobeLiveData();
+		}
+		return wardrobeLiveData;
+	}
+
+	private void initializeWardrobeLiveData() {
+		wardrobeLiveData.setValue(new Wardrobe());
 	}
 
 	@Override
