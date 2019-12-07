@@ -26,8 +26,10 @@ public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.View
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		holder.clothItem = clothItems.get(position);
+		ClothItem clothItem = clothItems.get(position);
+		holder.clothItem = clothItem;
 		holder.tvClothItemName.setText(clothItems.get(position).getName());
+		holder.itemView.setBackgroundColor(clothItem.getColor());
 	}
 
 	@Override

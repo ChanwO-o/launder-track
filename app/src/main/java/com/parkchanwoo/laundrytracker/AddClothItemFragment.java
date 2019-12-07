@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.jaredrummler.android.colorpicker.ColorPickerDialog;
+
 import java.util.ArrayList;
 
 public class AddClothItemFragment extends Fragment {
@@ -41,8 +43,12 @@ public class AddClothItemFragment extends Fragment {
 		bAddClothItem.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				wardrobeViewModel.addNewClothItem(new ClothItem());
+				buildAddClothItemDialog();
 			}
 		});
+	}
+
+	public void buildAddClothItemDialog() {
+		ColorPickerDialog.newBuilder().show(getActivity());
 	}
 }
