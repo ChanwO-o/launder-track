@@ -8,11 +8,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -38,11 +41,16 @@ public class WardrobeListFragment extends Fragment {
 
 		LiveData<ArrayList<Wardrobe>> wardrobesLiveData = laundryViewModel.getWardrobesLiveData();
 
-		RecyclerView rvWardrobeList = getView().findViewById(R.id.rvWardrobeList);
+		final TextView tvWardrobesCount = getView().findViewById(R.id.tvWardrobesCount);
+		final RecyclerView rvWardrobeList = getView().findViewById(R.id.rvWardrobeList);
+		rvWardrobeList.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 		wardrobesLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<Wardrobe>>() {
 			@Override
 			public void onChanged(ArrayList<Wardrobe> wardrobes) {
-
+				tvWardrobesCount.setText("Count: " + wardrobes.size());
+				rvWardrobeList.setAdapter(new WardrobeAdapter(wardrobes));
+//				wardrobeAdapter.notifyDataSetChanged();
 			}
 		});
 	}
