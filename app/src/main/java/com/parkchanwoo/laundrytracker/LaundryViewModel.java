@@ -32,9 +32,9 @@ public class LaundryViewModel extends ViewModel {
 		Log.i(TAG, "LaundryViewModel destroyed");
 	}
 
-	public void addNewWardrobe() {
+	public void addNewWardrobe(Wardrobe wardrobe) {
 		ArrayList<Wardrobe> temp = wardrobesLiveData.getValue();
-		temp.add(new Wardrobe());
+		temp.add(wardrobe);
 		wardrobesLiveData.setValue(temp);
 	}
 }
