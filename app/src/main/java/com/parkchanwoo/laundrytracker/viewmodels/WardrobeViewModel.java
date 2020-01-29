@@ -1,10 +1,12 @@
-package com.parkchanwoo.laundrytracker;
+package com.parkchanwoo.laundrytracker.viewmodels;
 
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.parkchanwoo.laundrytracker.models.ClothItem;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.parkchanwoo.laundrytracker;
+package com.parkchanwoo.laundrytracker.models;
 
 import android.graphics.Color;
 

@@ -1,8 +1,10 @@
-package com.parkchanwoo.laundrytracker;
+package com.parkchanwoo.laundrytracker.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.parkchanwoo.laundrytracker.R;
 
 public class MainActivity extends AppCompatActivity {
 

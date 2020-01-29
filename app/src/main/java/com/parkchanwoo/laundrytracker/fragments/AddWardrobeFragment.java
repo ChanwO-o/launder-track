@@ -1,4 +1,4 @@
-package com.parkchanwoo.laundrytracker;
+package com.parkchanwoo.laundrytracker.fragments;
 
 
 import android.app.AlertDialog;
@@ -16,6 +16,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+
+import com.parkchanwoo.laundrytracker.viewmodels.LaundryViewModel;
+import com.parkchanwoo.laundrytracker.R;
+import com.parkchanwoo.laundrytracker.models.Wardrobe;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.parkchanwoo.laundrytracker;
+package com.parkchanwoo.laundrytracker.fragments;
 
 
 import android.os.Bundle;
@@ -14,6 +14,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.jaredrummler.android.colorpicker.ColorPickerDialog;
+import com.parkchanwoo.laundrytracker.models.ClothItem;
+import com.parkchanwoo.laundrytracker.R;
+import com.parkchanwoo.laundrytracker.viewmodels.WardrobeViewModel;
 
 import java.util.ArrayList;
 
