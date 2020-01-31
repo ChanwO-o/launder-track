@@ -55,7 +55,7 @@ public class ObjectFileRepository {
 		{
 			FileOutputStream fos = appContext.openFileOutput(LAUNDRYTRACKER_FILE_NAME, Context.MODE_PRIVATE);
 			ObjectOutputStream os = new ObjectOutputStream(fos);
-			os.writeObject(laundryLiveData);
+			os.writeObject(laundryLiveData.getValue());
 			fos.close();
 			os.close();
 			Log.i(TAG, "writeLaundry() done");
@@ -70,11 +70,13 @@ public class ObjectFileRepository {
 		{
 			FileInputStream fis = appContext.openFileInput(LAUNDRYTRACKER_FILE_NAME);
 			ObjectInputStream is = new ObjectInputStream(fis);
-			MutableLiveData<ArrayList<Wardrobe>> laundryLiveData = (MutableLiveData<ArrayList<Wardrobe>>) is.readObject();
+			ArrayList<Wardrobe> laundryList = (ArrayList<Wardrobe>) is.readObject();
 			fis.close();
 			is.close();
 			Log.i(TAG, "readLaundry() done");
-			return laundryLiveData;
+			MutableLiveData<ArrayList<Wardrobe>> mld = new MutableLiveData<>();
+			mld.setValue(laundryList);
+			return mld;
 		} catch(Exception e) {
 			Log.i(TAG, "readLaundry() exception: " + e.getMessage());
 			return null;
