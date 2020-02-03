@@ -1,21 +1,22 @@
-package com.parkchanwoo.laundrytracker;
+package com.parkchanwoo.laundrytracker.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
-
-import java.util.ArrayList;
+import com.parkchanwoo.laundrytracker.models.ClothItem;
+import com.parkchanwoo.laundrytracker.R;
+import com.parkchanwoo.laundrytracker.models.Wardrobe;
+import com.parkchanwoo.laundrytracker.adapters.WardrobeAdapter;
+import com.parkchanwoo.laundrytracker.viewmodels.WardrobeViewModel;
 
 public class WardrobeActivity extends AppCompatActivity implements ColorPickerDialogListener {
 	private String TAG = this.getClass().getSimpleName();

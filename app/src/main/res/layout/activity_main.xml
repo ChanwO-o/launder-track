@@ -4,10 +4,10 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".MainActivity">
+	tools:context=".activities.MainActivity">
 
 	<fragment
-		android:name="com.parkchanwoo.laundrytracker.WardrobeListFragment"
+		android:name="com.parkchanwoo.laundrytracker.fragments.WardrobeListFragment"
 		android:id="@+id/wardrobeListFragment"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
@@ -15,7 +15,7 @@
 		app:layout_constraintBottom_toTopOf="@+id/addWardrobeFragment" />
 
 	<fragment
-		android:name="com.parkchanwoo.laundrytracker.AddWardrobeFragment"
+		android:name="com.parkchanwoo.laundrytracker.fragments.AddWardrobeFragment"
 		android:id="@+id/addWardrobeFragment"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

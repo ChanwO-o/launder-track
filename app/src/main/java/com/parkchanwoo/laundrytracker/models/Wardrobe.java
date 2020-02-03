@@ -1,4 +1,4 @@
-package com.parkchanwoo.laundrytracker;
+package com.parkchanwoo.laundrytracker.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;

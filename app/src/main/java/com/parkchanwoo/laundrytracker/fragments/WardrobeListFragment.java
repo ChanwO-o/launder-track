@@ -1,4 +1,4 @@
-package com.parkchanwoo.laundrytracker;
+package com.parkchanwoo.laundrytracker.fragments;
 
 
 import android.os.Bundle;
@@ -16,6 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.parkchanwoo.laundrytracker.viewmodels.LaundryViewModel;
+import com.parkchanwoo.laundrytracker.R;
+import com.parkchanwoo.laundrytracker.models.Wardrobe;
+import com.parkchanwoo.laundrytracker.adapters.WardrobeAdapter;
 
 import java.util.ArrayList;
 

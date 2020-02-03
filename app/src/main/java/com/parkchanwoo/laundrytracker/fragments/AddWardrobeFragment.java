@@ -1,4 +1,4 @@
-package com.parkchanwoo.laundrytracker;
+package com.parkchanwoo.laundrytracker.fragments;
 
 
 import android.app.AlertDialog;
@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
@@ -17,7 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
+import com.parkchanwoo.laundrytracker.viewmodels.LaundryViewModel;
+import com.parkchanwoo.laundrytracker.R;
+import com.parkchanwoo.laundrytracker.models.Wardrobe;
 
 public class AddWardrobeFragment extends Fragment {
 	private String TAG = this.getClass().getSimpleName();
@@ -38,8 +39,6 @@ public class AddWardrobeFragment extends Fragment {
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		laundryViewModel = ViewModelProviders.of(getActivity()).get(LaundryViewModel.class);
-
-		LiveData<ArrayList<Wardrobe>> wardrobesLiveData = laundryViewModel.getWardrobesLiveData();
 
 		Button bAddWardrobe = getView().findViewById(R.id.bAddWardrobe);
 		bAddWardrobe.setOnClickListener(new View.OnClickListener() {
