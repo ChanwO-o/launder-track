@@ -15,10 +15,7 @@ import java.util.List;
 
 public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.ViewHolder> {
 	private List<ClothItem> clothItems;
-
-	public ClothItemAdapter(List<ClothItem> clothItems) {
-		this.clothItems = clothItems;
-	}
+	private OnItemClickListener listener;
 
 	@NonNull
 	@Override
@@ -30,7 +27,6 @@ public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.View
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		ClothItem clothItem = clothItems.get(position);
-		holder.clothItem = clothItem;
 		holder.tvClothItemName.setText(clothItems.get(position).getName());
 		holder.itemView.setBackgroundColor(clothItem.getColor());
 	}
@@ -40,19 +36,37 @@ public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.View
 		return clothItems.size();
 	}
 
-	public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-		private ClothItem clothItem;
+	public void setClothItems(List<ClothItem> clothItems) {
+		this.clothItems = clothItems;
+		notifyDataSetChanged();
+	}
+
+	public ClothItem getClothItemAt(int position) {
+		return clothItems.get(position);
+	}
+
+	class ViewHolder extends RecyclerView.ViewHolder {
 		private TextView tvClothItemName;
 
 		public ViewHolder(@NonNull View itemView) {
 			super(itemView);
 			tvClothItemName = itemView.findViewById(R.id.tvClothItemName);
-			itemView.setOnClickListener(this);
+			itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					int position = getAdapterPosition();
+					if (listener != null && position != RecyclerView.NO_POSITION)
+						listener.onItemClick(clothItems.get(position));
+				}
+			});
 		}
+	}
 
-		@Override
-		public void onClick(View v) {
+	public interface OnItemClickListener {
+		void onItemClick(ClothItem clothItem);
+	}
 
-		}
+	public void setOnItemClickListener(OnItemClickListener listener) {
+		this.listener = listener;
 	}
 }
