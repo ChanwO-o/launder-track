@@ -2,10 +2,11 @@ package com.parkchanwoo.laundrytracker.models;
 
 import android.graphics.Color;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ClothItem {
+public class ClothItem implements Serializable {
 	private String name;
 	private int color;
 	private ArrayList<Date> washHistory;
