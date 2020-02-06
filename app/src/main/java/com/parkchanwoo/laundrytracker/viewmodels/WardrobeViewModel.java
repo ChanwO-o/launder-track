@@ -30,6 +30,10 @@ public class WardrobeViewModel extends AndroidViewModel {
 		return objectFileRepository.getWardrobeLiveData();
 	}
 
+	public void setWardrobeLiveData(Wardrobe wardrobe) {
+		objectFileRepository.setWardrobeLiveData(wardrobe);
+	}
+
 	public void addNewClothItem(ClothItem clothItem) {
 		objectFileRepository.addNewClothItem(clothItem);
 	}

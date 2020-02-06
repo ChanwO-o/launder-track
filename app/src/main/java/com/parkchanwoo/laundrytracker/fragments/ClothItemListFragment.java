@@ -1,6 +1,7 @@
 package com.parkchanwoo.laundrytracker.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -17,12 +18,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.parkchanwoo.laundrytracker.EditClothItemActivity;
 import com.parkchanwoo.laundrytracker.models.ClothItem;
 import com.parkchanwoo.laundrytracker.adapters.ClothItemAdapter;
 import com.parkchanwoo.laundrytracker.R;
+import com.parkchanwoo.laundrytracker.models.Wardrobe;
 import com.parkchanwoo.laundrytracker.viewmodels.WardrobeViewModel;
-
-import java.util.ArrayList;
 
 public class ClothItemListFragment extends Fragment {
 	private String TAG = this.getClass().getSimpleName();
@@ -42,20 +43,32 @@ public class ClothItemListFragment extends Fragment {
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		wardrobeViewModel = ViewModelProviders.of(getActivity()).get(WardrobeViewModel.class);
 
-		LiveData<ArrayList<ClothItem>> clothItemsLiveData = wardrobeViewModel.getClothItemsLiveData();
-
+		// Views
 		final TextView tvClothItemsCount = getView().findViewById(R.id.tvClothItemsCount);
-		final RecyclerView rvClothItems = getView().findViewById(R.id.rvClothItems);
+		RecyclerView rvClothItems = getView().findViewById(R.id.rvClothItems);
 		rvClothItems.setLayoutManager(new LinearLayoutManager(getActivity()));
+		rvClothItems.setHasFixedSize(true);
 		rvClothItems.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-
-		clothItemsLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<ClothItem>>() {
+		final ClothItemAdapter clothItemAdapter = new ClothItemAdapter();
+		rvClothItems.setAdapter(clothItemAdapter);
+		clothItemAdapter.setOnItemClickListener(new ClothItemAdapter.OnItemClickListener() {
 			@Override
-			public void onChanged(ArrayList<ClothItem> clothItems) {
-				tvClothItemsCount.setText("Cloth items count: " + clothItems.size());
-				rvClothItems.setAdapter(new ClothItemAdapter(clothItems));
+			public void onItemClick(ClothItem clothItem) {
+				Intent intent = new Intent(getActivity(), EditClothItemActivity.class);
+				intent.putExtra(EditClothItemActivity.CLOTHITEM_EXTRA_TAG, clothItem);
+				startActivity(intent);
+			}
+		});
+
+		// ViewModel
+		wardrobeViewModel = ViewModelProviders.of(getActivity()).get(WardrobeViewModel.class);
+		LiveData<Wardrobe> wardrobeLiveData = wardrobeViewModel.getWardrobeLiveData();
+		wardrobeLiveData.observe(getViewLifecycleOwner(), new Observer<Wardrobe>() {
+			@Override
+			public void onChanged(Wardrobe wardrobe) {
+				tvClothItemsCount.setText("Cloth items count: " + wardrobe.getCount());
+				clothItemAdapter.setClothItems(wardrobe.getClothItems());
 			}
 		});
 	}

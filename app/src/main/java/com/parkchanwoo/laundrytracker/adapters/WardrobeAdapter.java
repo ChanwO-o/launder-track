@@ -45,7 +45,6 @@ public class WardrobeAdapter extends RecyclerView.Adapter<WardrobeAdapter.ViewHo
 	}
 
 	class ViewHolder extends RecyclerView.ViewHolder {
-//		public static final String WARDROBE_EXTRA_TAG = "WARDROBE_EXTRA_TAG";
 		private TextView tvWardrobeName;
 
 		public ViewHolder(@NonNull View itemView) {

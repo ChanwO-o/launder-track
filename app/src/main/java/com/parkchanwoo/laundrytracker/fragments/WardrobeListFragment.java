@@ -1,6 +1,7 @@
 package com.parkchanwoo.laundrytracker.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.parkchanwoo.laundrytracker.activities.WardrobeActivity;
 import com.parkchanwoo.laundrytracker.viewmodels.LaundryViewModel;
 import com.parkchanwoo.laundrytracker.R;
 import com.parkchanwoo.laundrytracker.models.Wardrobe;
@@ -42,21 +44,32 @@ public class WardrobeListFragment extends Fragment {
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		laundryViewModel = ViewModelProviders.of(getActivity()).get(LaundryViewModel.class);
 
-		LiveData<ArrayList<Wardrobe>> wardrobesLiveData = laundryViewModel.getWardrobesLiveData();
-
+		// Views
 		final TextView tvWardrobesCount = getView().findViewById(R.id.tvWardrobesCount);
-		final RecyclerView rvWardrobes = getView().findViewById(R.id.rvWardrobes);
+		RecyclerView rvWardrobes = getView().findViewById(R.id.rvWardrobes);
 		rvWardrobes.setLayoutManager(new LinearLayoutManager(getActivity()));
+		rvWardrobes.setHasFixedSize(true);
 		rvWardrobes.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+		final WardrobeAdapter wardrobeAdapter = new WardrobeAdapter();
+		rvWardrobes.setAdapter(wardrobeAdapter);
+		wardrobeAdapter.setOnItemClickListener(new WardrobeAdapter.OnItemClickListener() {
+			@Override
+			public void onItemClick(Wardrobe wardrobe) {
+				Intent intent = new Intent(getActivity(), WardrobeActivity.class);
+				intent.putExtra(WardrobeActivity.WARDROBE_EXTRA_TAG, wardrobe);
+				startActivity(intent);
+			}
+		});
 
+		// ViewModel
+		laundryViewModel = ViewModelProviders.of(getActivity()).get(LaundryViewModel.class);
+		LiveData<ArrayList<Wardrobe>> wardrobesLiveData = laundryViewModel.getWardrobesLiveData();
 		wardrobesLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<Wardrobe>>() {
 			@Override
 			public void onChanged(ArrayList<Wardrobe> wardrobes) {
 				tvWardrobesCount.setText("Count: " + wardrobes.size());
-				rvWardrobes.setAdapter(new WardrobeAdapter(wardrobes));
-//				wardrobeAdapter.notifyDataSetChanged();
+				wardrobeAdapter.setWardrobes(wardrobes);
 			}
 		});
 	}
