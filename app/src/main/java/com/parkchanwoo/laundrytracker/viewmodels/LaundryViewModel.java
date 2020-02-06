@@ -32,6 +32,6 @@ public class LaundryViewModel extends AndroidViewModel {
 	}
 
 	public void addNewWardrobe(Wardrobe wardrobe) {
-		objectFileRepository.insert(wardrobe);
+		objectFileRepository.addNewWardrobe(wardrobe);
 	}
 }

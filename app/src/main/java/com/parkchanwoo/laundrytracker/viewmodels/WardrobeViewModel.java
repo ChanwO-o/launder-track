@@ -6,30 +6,18 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.parkchanwoo.laundrytracker.models.ClothItem;
-
-import java.util.ArrayList;
+import com.parkchanwoo.laundrytracker.models.Wardrobe;
+import com.parkchanwoo.laundrytracker.repositories.ObjectFileRepository;
 
 public class WardrobeViewModel extends AndroidViewModel {
 	private String TAG = this.getClass().getSimpleName();
-	private MutableLiveData<ArrayList<ClothItem>> clothItemsLiveData;
+	ObjectFileRepository objectFileRepository;
 
 	public WardrobeViewModel(@NonNull Application application) {
 		super(application);
-	}
-
-	public LiveData<ArrayList<ClothItem>> getClothItemsLiveData() {
-		if (clothItemsLiveData == null) {
-			clothItemsLiveData = new MutableLiveData<>();
-			initializeClothItemsLiveData();
-		}
-		return clothItemsLiveData;
-	}
-
-	private void initializeClothItemsLiveData() {
-		clothItemsLiveData.setValue(new ArrayList<ClothItem>());
+		objectFileRepository = new ObjectFileRepository(application);
 	}
 
 	@Override
@@ -38,9 +26,11 @@ public class WardrobeViewModel extends AndroidViewModel {
 		Log.i(TAG, "WardrobeViewModel destroyed");
 	}
 
+	public LiveData<Wardrobe> getWardrobeLiveData() {
+		return objectFileRepository.getWardrobeLiveData();
+	}
+
 	public void addNewClothItem(ClothItem clothItem) {
-		ArrayList<ClothItem> temp = clothItemsLiveData.getValue();
-		temp.add(clothItem);
-		clothItemsLiveData.setValue(temp);
+		objectFileRepository.addNewClothItem(clothItem);
 	}
 }
