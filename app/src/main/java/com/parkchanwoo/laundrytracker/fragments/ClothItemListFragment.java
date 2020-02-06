@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.parkchanwoo.laundrytracker.EditClothItemActivity;
+import com.parkchanwoo.laundrytracker.activities.EditClothItemActivity;
 import com.parkchanwoo.laundrytracker.models.ClothItem;
 import com.parkchanwoo.laundrytracker.adapters.ClothItemAdapter;
 import com.parkchanwoo.laundrytracker.R;
