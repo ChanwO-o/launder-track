@@ -10,7 +10,6 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
 		<activity android:name=".activities.EditClothItemActivity"></activity>
-		<activity android:name=".activities.WardrobeActivity" />
 		<activity android:name=".activities.MainActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
