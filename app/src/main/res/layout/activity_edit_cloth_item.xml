@@ -6,4 +6,11 @@
 	android:layout_height="match_parent"
 	tools:context=".activities.EditClothItemActivity">
 
+	<fragment
+		android:id="@+id/clothItemDetailsFragment"
+		android:name="com.parkchanwoo.laundrytracker.fragments.ClothItemDetailsFragment"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		tools:layout="@layout/fragment_cloth_item_details" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
