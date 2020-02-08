@@ -61,6 +61,10 @@ public class ClothItem implements Serializable {
 		this.washHistory = washHistory;
 	}
 
+	public void addWashDate(Date date) {
+		washHistory.add(date);
+	}
+
 	/**
 	 * Wash now and add current date to history
 	 */

@@ -43,6 +43,16 @@ public class WashHistoryAdapter extends RecyclerView.Adapter<WashHistoryAdapter.
 		return washHistory.get(position);
 	}
 
+	public void addDate(Date date) {
+		washHistory.add(date);
+		notifyDataSetChanged();
+	}
+
+	public void removeDate(Date date) {
+		washHistory.remove(date);
+		notifyDataSetChanged();
+	}
+
 	class ViewHolder extends RecyclerView.ViewHolder {
 		private TextView tvWashDate;
 
