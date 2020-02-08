@@ -7,20 +7,34 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class ClothItem implements Serializable {
+	private static int instanceNum = 0;
+	private String id;
 	private String name;
 	private int color;
 	private ArrayList<Date> washHistory;
 
 	public ClothItem() {
+		instanceNum++;
+		id = this.getClass().getSimpleName() + instanceNum;
 		name = "Unnamed Cloth Item";
 		color = Color.WHITE;
 		washHistory = new ArrayList<>();
 	}
 
 	public ClothItem(String name, int color) {
+		instanceNum++;
+		id = this.getClass().getSimpleName() + instanceNum;
 		this.name = name;
 		this.color = color;
 		washHistory = new ArrayList<>();
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
