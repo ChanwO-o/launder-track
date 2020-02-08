@@ -22,12 +22,13 @@ import com.parkchanwoo.laundrytracker.activities.EditClothItemActivity;
 import com.parkchanwoo.laundrytracker.models.ClothItem;
 import com.parkchanwoo.laundrytracker.adapters.ClothItemAdapter;
 import com.parkchanwoo.laundrytracker.R;
-import com.parkchanwoo.laundrytracker.models.Wardrobe;
-import com.parkchanwoo.laundrytracker.viewmodels.WardrobeViewModel;
+import com.parkchanwoo.laundrytracker.viewmodels.LaundryViewModel;
+
+import java.util.ArrayList;
 
 public class ClothItemListFragment extends Fragment {
 	private String TAG = this.getClass().getSimpleName();
-	private WardrobeViewModel wardrobeViewModel;
+	private LaundryViewModel laundryViewModel;
 
 	public ClothItemListFragment() {
 		// Required empty public constructor
@@ -62,13 +63,13 @@ public class ClothItemListFragment extends Fragment {
 		});
 
 		// ViewModel
-		wardrobeViewModel = ViewModelProviders.of(getActivity()).get(WardrobeViewModel.class);
-		LiveData<Wardrobe> wardrobeLiveData = wardrobeViewModel.getWardrobeLiveData();
-		wardrobeLiveData.observe(getViewLifecycleOwner(), new Observer<Wardrobe>() {
+		laundryViewModel = ViewModelProviders.of(getActivity()).get(LaundryViewModel.class);
+		LiveData<ArrayList<ClothItem>> clothItemsLiveData = laundryViewModel.getClothItemsLiveData();
+		clothItemsLiveData.observe(getViewLifecycleOwner(), new Observer<ArrayList<ClothItem>>() {
 			@Override
-			public void onChanged(Wardrobe wardrobe) {
-				tvClothItemsCount.setText("Cloth items count: " + wardrobe.getCount());
-				clothItemAdapter.setClothItems(wardrobe.getClothItems());
+			public void onChanged(ArrayList<ClothItem> clothItems) {
+				tvClothItemsCount.setText("Count: " + clothItems.size());
+				clothItemAdapter.setClothItems(clothItems);
 			}
 		});
 	}
