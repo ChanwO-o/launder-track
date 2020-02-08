@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.parkchanwoo.laundrytracker.models.ClothItem;
-import com.parkchanwoo.laundrytracker.models.Wardrobe;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -19,81 +18,43 @@ public class ObjectFileRepository {
 	private String TAG = this.getClass().getSimpleName();
 	private Context appContext;
 	private static final String LAUNDRYTRACKER_FILE_NAME = "laundrytracker.txt";
-	private MutableLiveData<ArrayList<Wardrobe>> wardrobesLiveData;
-	private MutableLiveData<Wardrobe> wardrobeLiveData;
+	private MutableLiveData<ArrayList<ClothItem>> clothItemsLiveData;
 
 	public ObjectFileRepository(Context context) {
 		appContext = context.getApplicationContext();
 	}
 
-	public LiveData<ArrayList<Wardrobe>> getWardrobesLiveData() {
-		if (wardrobesLiveData == null) {
-			Log.i(TAG, "wardrobesLiveData is null, reading from file");
-			wardrobesLiveData = readLaundry(); // read from file
-			if (wardrobesLiveData == null) { // still null
-				Log.i(TAG, "wardrobesLiveData is still null, creating new LiveData");
-				wardrobesLiveData = new MutableLiveData<>(); // create new
-				initializeWardrobesLiveData();
+	public LiveData<ArrayList<ClothItem>> getClothItemsLiveData() {
+		if (clothItemsLiveData == null) {
+			Log.i(TAG, "clothItemsLiveData is null, reading from file");
+			clothItemsLiveData = readLaundry(); // read from file
+			if (clothItemsLiveData == null) { // still null
+				Log.i(TAG, "clothItemsLiveData is still null, creating new LiveData");
+				clothItemsLiveData = new MutableLiveData<>(); // create new
+				initializeClothItemsLiveData();
 			}
 		}
-		Log.i(TAG, "returning wardrobesLiveData");
-		return wardrobesLiveData;
+		return clothItemsLiveData;
 	}
 
-	private void initializeWardrobesLiveData() {
-		wardrobesLiveData.setValue(new ArrayList<Wardrobe>());
-	}
-
-	public void addNewWardrobe(Wardrobe wardrobe) {
-		Log.i(TAG, "insert()");
-		ArrayList<Wardrobe> temp = wardrobesLiveData.getValue();
-		temp.add(wardrobe);
-		wardrobesLiveData.setValue(temp);
-		writeLaundry(temp);
-	}
-
-	public LiveData<Wardrobe> getWardrobeLiveData() {
-		if (wardrobeLiveData == null) {
-			Log.i(TAG, "wardrobeLiveData is null; creating new LiveData");
-			wardrobeLiveData = new MutableLiveData<>();
-			initializeWardrobeLiveData();
-		}
-		return wardrobeLiveData;
-	}
-
-	public void setWardrobeLiveData(Wardrobe wardrobe) {
-		if (wardrobeLiveData == null) {
-			wardrobeLiveData = new MutableLiveData<>();
-		}
-		wardrobeLiveData.setValue(wardrobe);
-	}
-
-	private void initializeWardrobeLiveData() {
-		wardrobeLiveData.setValue(new Wardrobe());
+	private void initializeClothItemsLiveData() {
+		clothItemsLiveData.setValue(new ArrayList<ClothItem>());
 	}
 
 	public void addNewClothItem(ClothItem clothItem) {
-		Wardrobe wardrobe = wardrobeLiveData.getValue();
-		if (wardrobe == null)
-			return;
-		wardrobe.addClothItem(clothItem);
-		wardrobeLiveData.setValue(wardrobe);
-//		writeLaundry(wardrobesLiveData);
+		Log.i(TAG, "insert()");
+		ArrayList<ClothItem> temp = clothItemsLiveData.getValue();
+		temp.add(clothItem);
+		clothItemsLiveData.setValue(temp);
+		writeLaundry(temp);
 	}
 
-	private Wardrobe getWardrobeWithName(String wardrobeName) {
-		for (Wardrobe wardrobe : wardrobesLiveData.getValue())
-			if (wardrobe.getName().equalsIgnoreCase(wardrobeName))
-				return wardrobe;
-		return null;
-	}
-
-	private void writeLaundry(ArrayList<Wardrobe> wardrobes) {
+	private void writeLaundry(ArrayList<ClothItem> clothItems) {
 		try
 		{
 			FileOutputStream fos = appContext.openFileOutput(LAUNDRYTRACKER_FILE_NAME, Context.MODE_PRIVATE);
 			ObjectOutputStream os = new ObjectOutputStream(fos);
-			os.writeObject(wardrobes);
+			os.writeObject(clothItems);
 			fos.close();
 			os.close();
 			Log.i(TAG, "writeLaundry() done");
@@ -103,16 +64,16 @@ public class ObjectFileRepository {
 		}
 	}
 
-	private MutableLiveData<ArrayList<Wardrobe>> readLaundry() {
+	private MutableLiveData<ArrayList<ClothItem>> readLaundry() {
 		try
 		{
 			FileInputStream fis = appContext.openFileInput(LAUNDRYTRACKER_FILE_NAME);
 			ObjectInputStream is = new ObjectInputStream(fis);
-			ArrayList<Wardrobe> laundryList = (ArrayList<Wardrobe>) is.readObject();
+			ArrayList<ClothItem> laundryList = (ArrayList<ClothItem>) is.readObject();
 			fis.close();
 			is.close();
 			Log.i(TAG, "readLaundry() done");
-			MutableLiveData<ArrayList<Wardrobe>> mld = new MutableLiveData<>();
+			MutableLiveData<ArrayList<ClothItem>> mld = new MutableLiveData<>();
 			mld.setValue(laundryList);
 			return mld;
 		} catch(Exception e) {
