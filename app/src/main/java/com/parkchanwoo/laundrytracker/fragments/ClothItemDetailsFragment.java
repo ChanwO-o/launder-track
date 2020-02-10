@@ -28,6 +28,7 @@ import com.parkchanwoo.laundrytracker.models.ClothItem;
 
 import java.util.Date;
 
+import static android.app.Activity.RESULT_OK;
 import static com.parkchanwoo.laundrytracker.activities.EditClothItemActivity.CLOTHITEM_EXTRA_TAG;
 
 public class ClothItemDetailsFragment extends Fragment {
@@ -107,6 +108,17 @@ public class ClothItemDetailsFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				buildAddWashDateDialog();
+			}
+		});
+
+		Button bClothItemEditSave = getActivity().findViewById(R.id.bClothItemEditSave);
+		bClothItemEditSave.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent data = new Intent();
+				data.putExtra(CLOTHITEM_EXTRA_TAG, clothItem);
+				getActivity().setResult(RESULT_OK, data);
+				getActivity().finish();
 			}
 		});
 	}
