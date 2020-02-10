@@ -32,6 +32,7 @@ import static com.parkchanwoo.laundrytracker.activities.EditClothItemActivity.CL
 public class ClothItemDetailsFragment extends Fragment {
 
 	private ClothItem clothItem;
+	private WashHistoryAdapter washHistoryAdapter;
 
 	public ClothItemDetailsFragment() {
 		// Required empty public constructor
@@ -71,7 +72,7 @@ public class ClothItemDetailsFragment extends Fragment {
 		rvClothItemWashHistory.setLayoutManager(new LinearLayoutManager(getActivity()));
 		rvClothItemWashHistory.setHasFixedSize(true);
 		rvClothItemWashHistory.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
-		final WashHistoryAdapter washHistoryAdapter = new WashHistoryAdapter();
+		washHistoryAdapter = new WashHistoryAdapter();
 		washHistoryAdapter.setWashHistory(clothItem.getWashHistory());
 		rvClothItemWashHistory.setAdapter(washHistoryAdapter);
 		washHistoryAdapter.setOnItemClickListener(new WashHistoryAdapter.OnItemClickListener() {
@@ -81,13 +82,21 @@ public class ClothItemDetailsFragment extends Fragment {
 			}
 		});
 
+		Button bClothItemAddWashHistoryNow = getActivity().findViewById(R.id.bClothItemAddWashHistoryNow);
+		bClothItemAddWashHistoryNow.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				clothItem.addWashDate(new Date());
+				washHistoryAdapter.setWashHistory(clothItem.getWashHistory());
+				washHistoryAdapter.notifyDataSetChanged();
+			}
+		});
+
 		Button bClothItemAddWashHistory = getActivity().findViewById(R.id.bClothItemAddWashHistory);
 		bClothItemAddWashHistory.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				washHistoryAdapter.addDate(new Date());
-				washHistoryAdapter.notifyDataSetChanged();
-				//buildAddWashDateDialog();
+				buildAddWashDateDialog();
 			}
 		});
 	}
@@ -105,6 +114,7 @@ public class ClothItemDetailsFragment extends Fragment {
 			public void onClick(DialogInterface dialog, int which) {
 				Date date = new Date(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth());
 				clothItem.addWashDate(date);
+				washHistoryAdapter.setWashHistory(clothItem.getWashHistory());
 			}
 		});
 		dialogAddWashDate.show();

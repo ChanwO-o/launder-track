@@ -33,9 +33,15 @@
 		android:layout_weight="1" />
 
 	<Button
+		android:id="@+id/bClothItemAddWashHistoryNow"
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:text="Just Washed" />
+
+	<Button
 		android:id="@+id/bClothItemAddWashHistory"
 		android:layout_width="match_parent"
 		android:layout_height="60dp"
-		android:text="Add Date" />
+		android:text="Add Another Date" />
 
 </LinearLayout>
