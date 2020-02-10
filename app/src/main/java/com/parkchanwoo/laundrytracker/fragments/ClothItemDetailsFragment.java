@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -58,15 +60,19 @@ public class ClothItemDetailsFragment extends Fragment {
 		// Views
 		TextView tvClothItemId = getActivity().findViewById(R.id.tvClothItemId);
 		tvClothItemId.setText("ID: " + clothItem.getId());
+
 		EditText etClothItemName = getActivity().findViewById(R.id.etClothItemName);
 		etClothItemName.setText(clothItem.getName());
+
 		LinearLayout llClothItemColor = getActivity().findViewById(R.id.llClothItemColor);
 		llClothItemColor.setBackgroundColor(clothItem.getColor());
 
 		final RecyclerView rvClothItemWashHistory = getActivity().findViewById(R.id.rvClothItemWashHistory);
+		rvClothItemWashHistory.setLayoutManager(new LinearLayoutManager(getActivity()));
+		rvClothItemWashHistory.setHasFixedSize(true);
+		rvClothItemWashHistory.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 		final WashHistoryAdapter washHistoryAdapter = new WashHistoryAdapter();
 		washHistoryAdapter.setWashHistory(clothItem.getWashHistory());
-		washHistoryAdapter.addDate(new Date());
 		rvClothItemWashHistory.setAdapter(washHistoryAdapter);
 		washHistoryAdapter.setOnItemClickListener(new WashHistoryAdapter.OnItemClickListener() {
 			@Override
@@ -81,8 +87,6 @@ public class ClothItemDetailsFragment extends Fragment {
 			public void onClick(View v) {
 				washHistoryAdapter.addDate(new Date());
 				washHistoryAdapter.notifyDataSetChanged();
-				rvClothItemWashHistory.setAdapter(washHistoryAdapter);
-				Log.i("washHistoryAdapter", "size: " + washHistoryAdapter.getItemCount());
 				//buildAddWashDateDialog();
 			}
 		});

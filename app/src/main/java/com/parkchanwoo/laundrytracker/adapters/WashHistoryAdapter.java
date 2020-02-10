@@ -20,7 +20,7 @@ public class WashHistoryAdapter extends RecyclerView.Adapter<WashHistoryAdapter.
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_clothitem, parent, false);
+		View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_washdate, parent, false);
 		return new ViewHolder(rowItem);
 	}
 
@@ -45,12 +45,10 @@ public class WashHistoryAdapter extends RecyclerView.Adapter<WashHistoryAdapter.
 
 	public void addDate(Date date) {
 		washHistory.add(date);
-		notifyDataSetChanged();
 	}
 
 	public void removeDate(Date date) {
 		washHistory.remove(date);
-		notifyDataSetChanged();
 	}
 
 	class ViewHolder extends RecyclerView.ViewHolder {
