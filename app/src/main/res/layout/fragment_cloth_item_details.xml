@@ -17,7 +17,15 @@
 		android:id="@+id/etClothItemName"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:hint="Name" />
+		android:hint="Name"
+		android:inputType="textAutoCorrect" />
+
+	<EditText
+		android:id="@+id/etClothItemBrand"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="Brand"
+		android:inputType="textAutoCorrect" />
 
 	<LinearLayout
 		android:id="@+id/llClothItemColor"

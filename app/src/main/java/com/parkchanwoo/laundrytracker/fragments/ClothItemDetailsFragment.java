@@ -69,6 +69,9 @@ public class ClothItemDetailsFragment extends Fragment {
 		final EditText etClothItemName = getActivity().findViewById(R.id.etClothItemName);
 		etClothItemName.setText(clothItem.getName());
 
+		final EditText etClothItemBrand = getActivity().findViewById(R.id.etClothItemBrand);
+		etClothItemBrand.setText(clothItem.getBrand());
+
 		llClothItemColor = getActivity().findViewById(R.id.llClothItemColor);
 		llClothItemColor.setBackgroundColor(clothItem.getColor());
 		llClothItemColor.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +119,7 @@ public class ClothItemDetailsFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				clothItem.setName(etClothItemName.getText().toString());
+				clothItem.setBrand(etClothItemBrand.getText().toString());
 				Intent data = new Intent();
 				data.putExtra(CLOTHITEM_EXTRA_TAG, clothItem);
 				getActivity().setResult(RESULT_OK, data);

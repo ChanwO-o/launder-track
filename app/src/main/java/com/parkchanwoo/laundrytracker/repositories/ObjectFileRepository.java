@@ -54,6 +54,7 @@ public class ObjectFileRepository {
 		for (ClothItem ci : temp)
 			if (clothItem.getId().equals(ci.getId())) {
 				ci.setName(clothItem.getName());
+				ci.setBrand(clothItem.getBrand());
 				ci.setColor(clothItem.getColor());
 				ci.setWashHistory(clothItem.getWashHistory());
 			}

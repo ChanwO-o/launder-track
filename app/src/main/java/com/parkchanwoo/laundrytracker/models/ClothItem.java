@@ -10,13 +10,15 @@ public class ClothItem implements Serializable {
 	private static int instanceNum = 0;
 	private String id;
 	private String name;
+	private String brand;
 	private int color;
 	private ArrayList<Date> washHistory;
 
 	public ClothItem() {
 		instanceNum++;
 		id = this.getClass().getSimpleName() + instanceNum;
-		name = "Unnamed Cloth Item";
+		name = "NoName";
+		brand = "";
 		color = Color.WHITE;
 		washHistory = new ArrayList<>();
 	}
@@ -43,6 +45,14 @@ public class ClothItem implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public int getColor() {
