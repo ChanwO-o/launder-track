@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jaredrummler.android.colorpicker.ColorPickerDialog;
 import com.parkchanwoo.laundrytracker.R;
 import com.parkchanwoo.laundrytracker.adapters.WashHistoryAdapter;
 import com.parkchanwoo.laundrytracker.models.ClothItem;
@@ -30,9 +31,11 @@ import java.util.Date;
 import static com.parkchanwoo.laundrytracker.activities.EditClothItemActivity.CLOTHITEM_EXTRA_TAG;
 
 public class ClothItemDetailsFragment extends Fragment {
+	public static String TAG = "ClothItemDetailsFragment";
 
 	private ClothItem clothItem;
 	private WashHistoryAdapter washHistoryAdapter;
+	private LinearLayout llClothItemColor;
 
 	public ClothItemDetailsFragment() {
 		// Required empty public constructor
@@ -65,8 +68,14 @@ public class ClothItemDetailsFragment extends Fragment {
 		EditText etClothItemName = getActivity().findViewById(R.id.etClothItemName);
 		etClothItemName.setText(clothItem.getName());
 
-		LinearLayout llClothItemColor = getActivity().findViewById(R.id.llClothItemColor);
+		llClothItemColor = getActivity().findViewById(R.id.llClothItemColor);
 		llClothItemColor.setBackgroundColor(clothItem.getColor());
+		llClothItemColor.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				buildChangeColorDialog();
+			}
+		});
 
 		final RecyclerView rvClothItemWashHistory = getActivity().findViewById(R.id.rvClothItemWashHistory);
 		rvClothItemWashHistory.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -102,6 +111,10 @@ public class ClothItemDetailsFragment extends Fragment {
 		});
 	}
 
+	private void buildChangeColorDialog() {
+		ColorPickerDialog.newBuilder().show(getActivity());
+	}
+
 	private void buildAddWashDateDialog() {
 		AlertDialog.Builder dialogAddWashDate = new AlertDialog.Builder(getActivity());
 		dialogAddWashDate.setTitle("Add new wash date");
@@ -119,5 +132,10 @@ public class ClothItemDetailsFragment extends Fragment {
 			}
 		});
 		dialogAddWashDate.show();
+	}
+
+	public void setClothItemColor(int color) {
+		clothItem.setColor(color);
+		llClothItemColor.setBackgroundColor(clothItem.getColor());
 	}
 }
