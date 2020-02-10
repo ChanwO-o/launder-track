@@ -15,5 +15,10 @@ public class EditClothItemActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_cloth_item);
+
+		ClothItemDetailsFragment clothItemDetailsFragment = new ClothItemDetailsFragment();
+		getSupportFragmentManager().beginTransaction()
+				.add(R.id.clEditClothItemActivity, clothItemDetailsFragment, ClothItemDetailsFragment.TAG)
+				.commit();
 	}
 }
