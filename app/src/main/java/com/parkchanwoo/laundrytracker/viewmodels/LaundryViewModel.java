@@ -34,4 +34,8 @@ public class LaundryViewModel extends AndroidViewModel {
 	public void addNewClothItem(ClothItem clothItem) {
 		objectFileRepository.addNewClothItem(clothItem);
 	}
+
+	public void updateClothItem(ClothItem clothItem) {
+		objectFileRepository.updateClothItem(clothItem);
+	}
 }

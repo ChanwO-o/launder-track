@@ -49,6 +49,18 @@ public class ObjectFileRepository {
 		writeLaundry(temp);
 	}
 
+	public void updateClothItem(ClothItem clothItem) {
+		ArrayList<ClothItem> temp = clothItemsLiveData.getValue();
+		for (ClothItem ci : temp)
+			if (clothItem.getId().equals(ci.getId())) {
+				ci.setName(clothItem.getName());
+				ci.setColor(clothItem.getColor());
+				ci.setWashHistory(clothItem.getWashHistory());
+			}
+		clothItemsLiveData.setValue(temp);
+		writeLaundry(temp);
+	}
+
 	private void writeLaundry(ArrayList<ClothItem> clothItems) {
 		try
 		{

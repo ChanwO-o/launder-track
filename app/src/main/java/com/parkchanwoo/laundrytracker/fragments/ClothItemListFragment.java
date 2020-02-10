@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +27,10 @@ import com.parkchanwoo.laundrytracker.viewmodels.LaundryViewModel;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_OK;
+
 public class ClothItemListFragment extends Fragment {
+	public static final int EDIT_CLOTH_REQUEST = 1;
 	private String TAG = this.getClass().getSimpleName();
 	private LaundryViewModel laundryViewModel;
 
@@ -58,7 +62,7 @@ public class ClothItemListFragment extends Fragment {
 			public void onItemClick(ClothItem clothItem) {
 				Intent intent = new Intent(getActivity(), EditClothItemActivity.class);
 				intent.putExtra(EditClothItemActivity.CLOTHITEM_EXTRA_TAG, clothItem);
-				startActivity(intent);
+				startActivityForResult(intent, EDIT_CLOTH_REQUEST);
 			}
 		});
 
@@ -72,5 +76,14 @@ public class ClothItemListFragment extends Fragment {
 				clothItemAdapter.setClothItems(clothItems);
 			}
 		});
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK) {
+			ClothItem clothItem = (ClothItem) data.getSerializableExtra(EditClothItemActivity.CLOTHITEM_EXTRA_TAG);
+			laundryViewModel.updateClothItem(clothItem);
+		}
 	}
 }
