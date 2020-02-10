@@ -2,24 +2,41 @@ package com.parkchanwoo.laundrytracker.models;
 
 import android.graphics.Color;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class ClothItem {
+public class ClothItem implements Serializable {
+	private static int instanceNum = 0;
+	private String id;
 	private String name;
+	private String brand;
 	private int color;
 	private ArrayList<Date> washHistory;
 
 	public ClothItem() {
-		name = "Unnamed Cloth Item";
+		instanceNum++;
+		id = this.getClass().getSimpleName() + instanceNum;
+		name = "NoName";
+		brand = "";
 		color = Color.WHITE;
 		washHistory = new ArrayList<>();
 	}
 
 	public ClothItem(String name, int color) {
+		instanceNum++;
+		id = this.getClass().getSimpleName() + instanceNum;
 		this.name = name;
 		this.color = color;
 		washHistory = new ArrayList<>();
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -28,6 +45,14 @@ public class ClothItem {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 
 	public int getColor() {
@@ -46,6 +71,10 @@ public class ClothItem {
 		this.washHistory = washHistory;
 	}
 
+	public void addWashDate(Date date) {
+		washHistory.add(date);
+	}
+
 	/**
 	 * Wash now and add current date to history
 	 */
@@ -57,7 +86,7 @@ public class ClothItem {
 	/**
 	 * Remove history record
 	 */
-	public void removeHistory(Date date) {
+	public void removeWashDate(Date date) {
 		washHistory.remove(date);
 	}
 

@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.parkchanwoo.laundrytracker.models.Wardrobe;
+import com.parkchanwoo.laundrytracker.models.ClothItem;
 import com.parkchanwoo.laundrytracker.repositories.ObjectFileRepository;
 
 import java.util.ArrayList;
@@ -27,11 +27,15 @@ public class LaundryViewModel extends AndroidViewModel {
 		Log.i(TAG, "LaundryViewModel destroyed");
 	}
 
-	public LiveData<ArrayList<Wardrobe>> getWardrobesLiveData() {
-		return objectFileRepository.getWardrobesLiveData();
+	public LiveData<ArrayList<ClothItem>> getClothItemsLiveData() {
+		return objectFileRepository.getClothItemsLiveData();
 	}
 
-	public void addNewWardrobe(Wardrobe wardrobe) {
-		objectFileRepository.insert(wardrobe);
+	public void addNewClothItem(ClothItem clothItem) {
+		objectFileRepository.addNewClothItem(clothItem);
+	}
+
+	public void updateClothItem(ClothItem clothItem) {
+		objectFileRepository.updateClothItem(clothItem);
 	}
 }

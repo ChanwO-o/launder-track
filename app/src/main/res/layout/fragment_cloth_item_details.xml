@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical"
+	android:padding="10dp"
+	tools:context=".fragments.ClothItemDetailsFragment">
+
+	<TextView
+		android:id="@+id/tvClothItemId"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="ID: abcde123" />
+
+	<EditText
+		android:id="@+id/etClothItemName"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="Name"
+		android:inputType="textAutoCorrect" />
+
+	<EditText
+		android:id="@+id/etClothItemBrand"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:hint="Brand"
+		android:inputType="textAutoCorrect" />
+
+	<LinearLayout
+		android:id="@+id/llClothItemColor"
+		android:layout_width="match_parent"
+		android:layout_height="40dp"
+		android:background="@color/colorAccent"
+		android:orientation="horizontal" />
+
+	<androidx.recyclerview.widget.RecyclerView
+		android:id="@+id/rvClothItemWashHistory"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1" />
+
+	<Button
+		android:id="@+id/bClothItemAddWashHistoryNow"
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:text="Just Washed" />
+
+	<Button
+		android:id="@+id/bClothItemAddWashHistory"
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:text="Add Another Date" />
+
+	<Button
+		android:id="@+id/bClothItemEditSave"
+		android:layout_width="match_parent"
+		android:layout_height="60dp"
+		android:text="Save" />
+
+</LinearLayout>

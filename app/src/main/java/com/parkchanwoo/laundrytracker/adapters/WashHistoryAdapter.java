@@ -9,61 +9,67 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.parkchanwoo.laundrytracker.R;
-import com.parkchanwoo.laundrytracker.models.ClothItem;
 
+import java.util.Date;
 import java.util.List;
 
-public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.ViewHolder> {
-	private List<ClothItem> clothItems;
+public class WashHistoryAdapter extends RecyclerView.Adapter<WashHistoryAdapter.ViewHolder> {
+	private List<Date> washHistory;
 	private OnItemClickListener listener;
 
 	@NonNull
 	@Override
 	public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_clothitem, parent, false);
+		View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_washdate, parent, false);
 		return new ViewHolder(rowItem);
 	}
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		ClothItem clothItem = clothItems.get(position);
-		holder.tvClothItemName.setText(clothItems.get(position).getName());
-		holder.itemView.setBackgroundColor(clothItem.getColor());
+		holder.tvWashDate.setText(washHistory.get(position).toString());
 	}
 
 	@Override
 	public int getItemCount() {
-		return clothItems.size();
+		return washHistory.size();
 	}
 
-	public void setClothItems(List<ClothItem> clothItems) {
-		this.clothItems = clothItems;
+	public void setWashHistory(List<Date> washHistory) {
+		this.washHistory = washHistory;
 		notifyDataSetChanged();
 	}
 
-	public ClothItem getClothItemAt(int position) {
-		return clothItems.get(position);
+	public Date getDateAt(int position) {
+		return washHistory.get(position);
+	}
+
+	public void addDate(Date date) {
+		washHistory.add(date);
+	}
+
+	public void removeDate(Date date) {
+		washHistory.remove(date);
 	}
 
 	class ViewHolder extends RecyclerView.ViewHolder {
-		private TextView tvClothItemName;
+		private TextView tvWashDate;
 
 		public ViewHolder(@NonNull View itemView) {
 			super(itemView);
-			tvClothItemName = itemView.findViewById(R.id.tvClothItemName);
+			tvWashDate = itemView.findViewById(R.id.tvWashDate);
 			itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					int position = getAdapterPosition();
 					if (listener != null && position != RecyclerView.NO_POSITION)
-						listener.onItemClick(clothItems.get(position));
+						listener.onItemClick(washHistory.get(position));
 				}
 			});
 		}
 	}
 
 	public interface OnItemClickListener {
-		void onItemClick(ClothItem clothItem);
+		void onItemClick(Date date);
 	}
 
 	public void setOnItemClickListener(OnItemClickListener listener) {
