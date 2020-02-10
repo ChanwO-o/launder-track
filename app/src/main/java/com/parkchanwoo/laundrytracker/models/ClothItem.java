@@ -76,7 +76,7 @@ public class ClothItem implements Serializable {
 	/**
 	 * Remove history record
 	 */
-	public void removeHistory(Date date) {
+	public void removeWashDate(Date date) {
 		washHistory.remove(date);
 	}
 

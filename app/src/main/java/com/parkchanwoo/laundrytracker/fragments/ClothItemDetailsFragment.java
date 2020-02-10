@@ -78,7 +78,8 @@ public class ClothItemDetailsFragment extends Fragment {
 		washHistoryAdapter.setOnItemClickListener(new WashHistoryAdapter.OnItemClickListener() {
 			@Override
 			public void onItemClick(Date date) {
-				washHistoryAdapter.removeDate(date);
+				clothItem.removeWashDate(date);
+				washHistoryAdapter.setWashHistory(clothItem.getWashHistory());
 			}
 		});
 
