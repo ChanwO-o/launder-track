@@ -66,7 +66,7 @@ public class ClothItemDetailsFragment extends Fragment {
 		TextView tvClothItemId = getActivity().findViewById(R.id.tvClothItemId);
 		tvClothItemId.setText("ID: " + clothItem.getId());
 
-		EditText etClothItemName = getActivity().findViewById(R.id.etClothItemName);
+		final EditText etClothItemName = getActivity().findViewById(R.id.etClothItemName);
 		etClothItemName.setText(clothItem.getName());
 
 		llClothItemColor = getActivity().findViewById(R.id.llClothItemColor);
@@ -115,6 +115,7 @@ public class ClothItemDetailsFragment extends Fragment {
 		bClothItemEditSave.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				clothItem.setName(etClothItemName.getText().toString());
 				Intent data = new Intent();
 				data.putExtra(CLOTHITEM_EXTRA_TAG, clothItem);
 				getActivity().setResult(RESULT_OK, data);
