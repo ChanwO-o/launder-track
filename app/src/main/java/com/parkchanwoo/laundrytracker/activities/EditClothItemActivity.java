@@ -15,6 +15,7 @@ public class EditClothItemActivity extends AppCompatActivity implements ColorPic
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		setTheme(R.style.AppTheme);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_cloth_item);
 
