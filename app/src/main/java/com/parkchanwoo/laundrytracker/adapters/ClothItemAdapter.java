@@ -11,11 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.parkchanwoo.laundrytracker.R;
 import com.parkchanwoo.laundrytracker.models.ClothItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.ViewHolder> {
 	private List<ClothItem> clothItems;
 	private OnItemClickListener listener;
+
+	public ClothItemAdapter() {
+		clothItems = new ArrayList<>();
+	}
 
 	@NonNull
 	@Override

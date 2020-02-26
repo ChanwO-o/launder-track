@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:arv="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -12,9 +13,19 @@
 		android:layout_height="wrap_content"
 		android:text="Cloth items count: n" />
 
-	<androidx.recyclerview.widget.RecyclerView
+	<com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveRecyclerView
 		android:id="@+id/rvClothItems"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" />
+
+	<com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveMessageView
+		android:id="@+id/amvClothItems"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		arv:message_image="@drawable/ic_adaptive_message_view_image"
+		arv:message_image_tint="@color/colorPrimary"
+		arv:message_text="@string/adaptive_message_view_text"
+		arv:message_text_size="@dimen/text_size_medium"
+		arv:message_text_color="@color/colorPrimary" />
 
 </LinearLayout>

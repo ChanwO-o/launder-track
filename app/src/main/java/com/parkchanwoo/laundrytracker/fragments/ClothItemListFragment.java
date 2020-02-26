@@ -24,6 +24,8 @@ import com.parkchanwoo.laundrytracker.models.ClothItem;
 import com.parkchanwoo.laundrytracker.adapters.ClothItemAdapter;
 import com.parkchanwoo.laundrytracker.R;
 import com.parkchanwoo.laundrytracker.viewmodels.LaundryViewModel;
+import com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveMessageView;
+import com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveRecyclerView;
 
 import java.util.ArrayList;
 
@@ -51,10 +53,12 @@ public class ClothItemListFragment extends Fragment {
 
 		// Views
 		final TextView tvClothItemsCount = getView().findViewById(R.id.tvClothItemsCount);
-		RecyclerView rvClothItems = getView().findViewById(R.id.rvClothItems);
+		AdaptiveRecyclerView rvClothItems = getView().findViewById(R.id.rvClothItems);
+		AdaptiveMessageView amvClothItems = getView().findViewById(R.id.amvClothItems);
 		rvClothItems.setLayoutManager(new LinearLayoutManager(getActivity()));
 		rvClothItems.setHasFixedSize(true);
 		rvClothItems.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+		rvClothItems.setMessageView(amvClothItems);
 		final ClothItemAdapter clothItemAdapter = new ClothItemAdapter();
 		rvClothItems.setAdapter(clothItemAdapter);
 		clothItemAdapter.setOnItemClickListener(new ClothItemAdapter.OnItemClickListener() {
