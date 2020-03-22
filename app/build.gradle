@@ -39,7 +39,10 @@ dependencies {
 
 	implementation 'com.jaredrummler:colorpicker:1.1.0' // color picker
 	implementation 'com.smlnskgmail.jaman:adaptiverecyclerview:0.1.1' // empty RecyclerView with message
-	implementation "ss.anoop:awesome-textinput-layout:1.0.1"
+	implementation "ss.anoop:awesome-textinput-layout:1.0.1" // fancy but buggy edittext
+	implementation ( 'com.github.thekhaeng:pushdown-anim-click:1.1.1' ) {
+		exclude group: 'com.android.support'
+	}
 }
 
 apply plugin: 'com.google.gms.google-services'
