@@ -1,5 +1,6 @@
 package com.parkchanwoo.laundrytracker.adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,9 @@ public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.View
 		ClothItem clothItem = clothItems.get(position);
 		holder.tvClothItemName.setText(clothItems.get(position).getName());
 		holder.itemView.setBackgroundColor(clothItem.getColor());
+		int BLACK = -16777216;
+		if (clothItem.getColor() == BLACK) // color selected is black
+			holder.tvClothItemName.setTextColor(Color.WHITE);
 	}
 
 	@Override
