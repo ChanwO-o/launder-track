@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
@@ -11,26 +12,48 @@
 		android:id="@+id/tvClothItemId"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginBottom="16dp"
 		android:text="ID: abcde123" />
 
-	<EditText
-		android:id="@+id/etClothItemName"
+	<ss.anoop.awesometextinputlayout.AwesomeTextInputLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:hint="Name"
-		android:inputType="textAutoCorrect" />
+		android:padding="16dp"
+		app:borderColor="@color/colorPrimary"
+		app:borderWidth="2dp"
+		app:cornerRadius="8dp">
 
-	<EditText
-		android:id="@+id/etClothItemBrand"
+		<EditText
+			android:id="@+id/etClothItemName"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Name"
+			android:inputType="textAutoCorrect" />
+
+	</ss.anoop.awesometextinputlayout.AwesomeTextInputLayout>
+
+	<ss.anoop.awesometextinputlayout.AwesomeTextInputLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:hint="Brand"
-		android:inputType="textAutoCorrect" />
+		android:padding="16dp"
+		app:borderColor="#5300e8"
+		app:borderWidth="2dp"
+		app:cornerRadius="8dp">
+
+		<EditText
+			android:id="@+id/etClothItemBrand"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:hint="Brand"
+			android:inputType="textAutoCorrect" />
+
+	</ss.anoop.awesometextinputlayout.AwesomeTextInputLayout>
 
 	<LinearLayout
 		android:id="@+id/llClothItemColor"
 		android:layout_width="match_parent"
 		android:layout_height="40dp"
+		android:layout_marginTop="16dp"
 		android:background="@color/colorAccent"
 		android:orientation="horizontal" />
 
