@@ -45,6 +45,10 @@ public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.View
 		return clothItems.size();
 	}
 
+	public List<ClothItem> getClothItems() {
+		return clothItems;
+	}
+
 	public void setClothItems(List<ClothItem> clothItems) {
 		this.clothItems = clothItems;
 		notifyDataSetChanged();

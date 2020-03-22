@@ -96,4 +96,9 @@ public class ClothItem implements Serializable {
 	public void clearHistory() {
 		washHistory.clear();
 	}
+
+	@Override
+	public String toString() {
+		return id + " " + name + " " + brand + " " + color;
+	}
 }

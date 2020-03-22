@@ -77,6 +77,7 @@ public class ClothItemListFragment extends Fragment {
 			@Override
 			public void onChanged(ArrayList<ClothItem> clothItems) {
 				tvClothItemsCount.setText("Count: " + clothItems.size());
+				Log.d("clothitemadapter", clothItemAdapter.getClothItems() + "");
 				clothItemAdapter.setClothItems(clothItems);
 			}
 		});
