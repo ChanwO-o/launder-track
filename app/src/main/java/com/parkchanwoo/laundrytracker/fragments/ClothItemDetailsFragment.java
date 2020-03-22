@@ -25,6 +25,7 @@ import com.jaredrummler.android.colorpicker.ColorPickerDialog;
 import com.parkchanwoo.laundrytracker.R;
 import com.parkchanwoo.laundrytracker.adapters.WashHistoryAdapter;
 import com.parkchanwoo.laundrytracker.models.ClothItem;
+import com.thekhaeng.pushdownanim.PushDownAnim;
 
 import java.util.Date;
 
@@ -97,33 +98,46 @@ public class ClothItemDetailsFragment extends Fragment {
 		});
 
 		Button bClothItemAddWashHistoryNow = getActivity().findViewById(R.id.bClothItemAddWashHistoryNow);
-		bClothItemAddWashHistoryNow.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				clothItem.addWashDate(new Date());
-				washHistoryAdapter.setWashHistory(clothItem.getWashHistory());
-				washHistoryAdapter.notifyDataSetChanged();
-			}
+		PushDownAnim.setPushDownAnimTo(bClothItemAddWashHistoryNow)
+			.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					clothItem.addWashDate(new Date());
+					washHistoryAdapter.setWashHistory(clothItem.getWashHistory());
+					washHistoryAdapter.notifyDataSetChanged();
+				}
 		});
 
 		Button bClothItemAddWashHistory = getActivity().findViewById(R.id.bClothItemAddWashHistory);
-		bClothItemAddWashHistory.setOnClickListener(new View.OnClickListener() {
+		PushDownAnim.setPushDownAnimTo(bClothItemAddWashHistory)
+		.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				buildAddWashDateDialog();
 			}
 		});
 
+		Button bClothItemDelete = getActivity().findViewById(R.id.bClothItemDelete);
+		PushDownAnim.setPushDownAnimTo(bClothItemDelete)
+			.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+
+
+				}
+		});
+
 		Button bClothItemEditSave = getActivity().findViewById(R.id.bClothItemEditSave);
-		bClothItemEditSave.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				clothItem.setName(etClothItemName.getText().toString());
-				clothItem.setBrand(etClothItemBrand.getText().toString());
-				Intent data = new Intent();
-				data.putExtra(CLOTHITEM_EXTRA_TAG, clothItem);
-				getActivity().setResult(RESULT_OK, data);
-				getActivity().finish();
+		PushDownAnim.setPushDownAnimTo(bClothItemEditSave)
+			.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					clothItem.setName(etClothItemName.getText().toString());
+					clothItem.setBrand(etClothItemBrand.getText().toString());
+					Intent data = new Intent();
+					data.putExtra(CLOTHITEM_EXTRA_TAG, clothItem);
+					getActivity().setResult(RESULT_OK, data);
+					getActivity().finish();
 			}
 		});
 	}
