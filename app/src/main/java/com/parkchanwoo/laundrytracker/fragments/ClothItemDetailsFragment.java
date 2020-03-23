@@ -29,8 +29,10 @@ import com.thekhaeng.pushdownanim.PushDownAnim;
 
 import java.util.Date;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static com.parkchanwoo.laundrytracker.activities.EditClothItemActivity.CLOTHITEM_EXTRA_TAG;
+import static com.parkchanwoo.laundrytracker.activities.EditClothItemActivity.DELETE_CLOTHITEM_ID_TAG;
 
 public class ClothItemDetailsFragment extends Fragment {
 	public static String TAG = "ClothItemDetailsFragment";
@@ -122,8 +124,7 @@ public class ClothItemDetailsFragment extends Fragment {
 			.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-
-
+					buildDeleteDialog();
 				}
 		});
 
@@ -163,6 +164,27 @@ public class ClothItemDetailsFragment extends Fragment {
 			}
 		});
 		dialogAddWashDate.show();
+	}
+
+	private void buildDeleteDialog() {
+		AlertDialog.Builder dialogDelete = new AlertDialog.Builder(getActivity());
+		dialogDelete.setTitle("Delete ClothItem?");
+		dialogDelete.setPositiveButton("Yes, Delete", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent data = new Intent();
+				data.putExtra(DELETE_CLOTHITEM_ID_TAG, clothItem.getId());
+				getActivity().setResult(RESULT_CANCELED, data);
+				getActivity().finish();
+			}
+		});
+		dialogDelete.setNegativeButton("No JK!", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+			}
+		});
+		dialogDelete.show();
 	}
 
 	public void setClothItemColor(int color) {

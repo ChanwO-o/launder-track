@@ -29,6 +29,7 @@ import com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveRecyclerView;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 public class ClothItemListFragment extends Fragment {
@@ -86,9 +87,13 @@ public class ClothItemListFragment extends Fragment {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode == RESULT_OK) {
+		if (resultCode == RESULT_OK) { // edit success
 			ClothItem clothItem = (ClothItem) data.getSerializableExtra(EditClothItemActivity.CLOTHITEM_EXTRA_TAG);
 			laundryViewModel.updateClothItem(clothItem);
+		}
+		else if (resultCode == RESULT_CANCELED) { // delete item
+			String clothItemId = data.getStringExtra(EditClothItemActivity.DELETE_CLOTHITEM_ID_TAG);
+			laundryViewModel.deleteClothItem(clothItemId);
 		}
 	}
 }
