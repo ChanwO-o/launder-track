@@ -5,9 +5,9 @@ import android.graphics.Color;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 public class ClothItem implements Serializable {
-	private static int instanceNum = 0;
 	private String id;
 	private String name;
 	private String brand;
@@ -15,8 +15,7 @@ public class ClothItem implements Serializable {
 	private ArrayList<Date> washHistory;
 
 	public ClothItem() {
-		instanceNum++;
-		id = this.getClass().getSimpleName() + instanceNum;
+		id = UUID.randomUUID().toString();
 		name = "NoName";
 		brand = "";
 		color = Color.WHITE;
@@ -24,8 +23,7 @@ public class ClothItem implements Serializable {
 	}
 
 	public ClothItem(String name, int color) {
-		instanceNum++;
-		id = this.getClass().getSimpleName() + instanceNum;
+		id = UUID.randomUUID().toString();
 		this.name = name;
 		this.color = color;
 		washHistory = new ArrayList<>();
@@ -95,5 +93,10 @@ public class ClothItem implements Serializable {
 	 */
 	public void clearHistory() {
 		washHistory.clear();
+	}
+
+	@Override
+	public String toString() {
+		return id + " " + name + " " + brand + " " + color;
 	}
 }

@@ -12,9 +12,11 @@ public class EditClothItemActivity extends AppCompatActivity implements ColorPic
 	private String TAG = this.getClass().getSimpleName();
 
 	public static final String CLOTHITEM_EXTRA_TAG = "CLOTHITEM_EXTRA_TAG";
+	public static final String DELETE_CLOTHITEM_ID_TAG = "DELETE_CLOTHITEM_ID_TAG";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		setTheme(R.style.AppTheme);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_cloth_item);
 

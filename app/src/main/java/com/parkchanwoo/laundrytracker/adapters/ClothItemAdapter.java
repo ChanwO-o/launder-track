@@ -1,5 +1,6 @@
 package com.parkchanwoo.laundrytracker.adapters;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.parkchanwoo.laundrytracker.R;
 import com.parkchanwoo.laundrytracker.models.ClothItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.ViewHolder> {
 	private List<ClothItem> clothItems;
 	private OnItemClickListener listener;
+
+	public ClothItemAdapter() {
+		clothItems = new ArrayList<>();
+	}
 
 	@NonNull
 	@Override
@@ -29,11 +35,18 @@ public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.View
 		ClothItem clothItem = clothItems.get(position);
 		holder.tvClothItemName.setText(clothItems.get(position).getName());
 		holder.itemView.setBackgroundColor(clothItem.getColor());
+		int BLACK = -16777216;
+		if (clothItem.getColor() == BLACK) // color selected is black
+			holder.tvClothItemName.setTextColor(Color.WHITE);
 	}
 
 	@Override
 	public int getItemCount() {
 		return clothItems.size();
+	}
+
+	public List<ClothItem> getClothItems() {
+		return clothItems;
 	}
 
 	public void setClothItems(List<ClothItem> clothItems) {

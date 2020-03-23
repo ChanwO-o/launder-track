@@ -38,4 +38,8 @@ public class LaundryViewModel extends AndroidViewModel {
 	public void updateClothItem(ClothItem clothItem) {
 		objectFileRepository.updateClothItem(clothItem);
 	}
+
+	public void deleteClothItem(String clothItemId) {
+		objectFileRepository.deleteClothItem(clothItemId);
+	}
 }

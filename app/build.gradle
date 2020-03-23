@@ -32,12 +32,17 @@ dependencies {
 	implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 	implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
-	implementation 'com.jaredrummler:colorpicker:1.1.0'
-
 	// add the Firebase SDK for Google Analytics
 	implementation 'com.google.firebase:firebase-analytics:17.2.0'
 	// add SDKs for any other desired Firebase products
 	// https://firebase.google.com/docs/android/setup#available-libraries
+
+	implementation 'com.jaredrummler:colorpicker:1.1.0' // color picker
+	implementation 'com.smlnskgmail.jaman:adaptiverecyclerview:0.1.1' // empty RecyclerView with message
+	implementation "ss.anoop:awesome-textinput-layout:1.0.1" // fancy but buggy edittext
+	implementation ( 'com.github.thekhaeng:pushdown-anim-click:1.1.1' ) {
+		exclude group: 'com.android.support'
+	}
 }
 
 apply plugin: 'com.google.gms.google-services'

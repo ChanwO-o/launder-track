@@ -24,9 +24,12 @@ import com.parkchanwoo.laundrytracker.models.ClothItem;
 import com.parkchanwoo.laundrytracker.adapters.ClothItemAdapter;
 import com.parkchanwoo.laundrytracker.R;
 import com.parkchanwoo.laundrytracker.viewmodels.LaundryViewModel;
+import com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveMessageView;
+import com.smlnskgmail.jaman.adaptiverecyclerview.AdaptiveRecyclerView;
 
 import java.util.ArrayList;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 
 public class ClothItemListFragment extends Fragment {
@@ -51,10 +54,12 @@ public class ClothItemListFragment extends Fragment {
 
 		// Views
 		final TextView tvClothItemsCount = getView().findViewById(R.id.tvClothItemsCount);
-		RecyclerView rvClothItems = getView().findViewById(R.id.rvClothItems);
+		AdaptiveRecyclerView rvClothItems = getView().findViewById(R.id.rvClothItems);
+		AdaptiveMessageView amvClothItems = getView().findViewById(R.id.amvClothItems);
 		rvClothItems.setLayoutManager(new LinearLayoutManager(getActivity()));
 		rvClothItems.setHasFixedSize(true);
 		rvClothItems.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+		rvClothItems.setMessageView(amvClothItems);
 		final ClothItemAdapter clothItemAdapter = new ClothItemAdapter();
 		rvClothItems.setAdapter(clothItemAdapter);
 		clothItemAdapter.setOnItemClickListener(new ClothItemAdapter.OnItemClickListener() {
@@ -73,6 +78,7 @@ public class ClothItemListFragment extends Fragment {
 			@Override
 			public void onChanged(ArrayList<ClothItem> clothItems) {
 				tvClothItemsCount.setText("Count: " + clothItems.size());
+				Log.d("clothitemadapter", clothItemAdapter.getClothItems() + "");
 				clothItemAdapter.setClothItems(clothItems);
 			}
 		});
@@ -81,9 +87,13 @@ public class ClothItemListFragment extends Fragment {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode == RESULT_OK) {
+		if (resultCode == RESULT_OK) { // edit success
 			ClothItem clothItem = (ClothItem) data.getSerializableExtra(EditClothItemActivity.CLOTHITEM_EXTRA_TAG);
 			laundryViewModel.updateClothItem(clothItem);
+		}
+		else if (resultCode == RESULT_CANCELED) { // delete item
+			String clothItemId = data.getStringExtra(EditClothItemActivity.DELETE_CLOTHITEM_ID_TAG);
+			laundryViewModel.deleteClothItem(clothItemId);
 		}
 	}
 }

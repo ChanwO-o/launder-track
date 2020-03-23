@@ -62,6 +62,17 @@ public class ObjectFileRepository {
 		writeLaundry(temp);
 	}
 
+	public void deleteClothItem(String clothItemId) {
+		ArrayList<ClothItem> temp = clothItemsLiveData.getValue();
+		for (ClothItem ci : temp)
+			if (clothItemId.equals(ci.getId())) {
+				temp.remove(ci);
+				break;
+			}
+		clothItemsLiveData.setValue(temp);
+		writeLaundry(temp);
+	}
+
 	private void writeLaundry(ArrayList<ClothItem> clothItems) {
 		try
 		{

@@ -25,11 +25,14 @@ import com.jaredrummler.android.colorpicker.ColorPickerDialog;
 import com.parkchanwoo.laundrytracker.R;
 import com.parkchanwoo.laundrytracker.adapters.WashHistoryAdapter;
 import com.parkchanwoo.laundrytracker.models.ClothItem;
+import com.thekhaeng.pushdownanim.PushDownAnim;
 
 import java.util.Date;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static com.parkchanwoo.laundrytracker.activities.EditClothItemActivity.CLOTHITEM_EXTRA_TAG;
+import static com.parkchanwoo.laundrytracker.activities.EditClothItemActivity.DELETE_CLOTHITEM_ID_TAG;
 
 public class ClothItemDetailsFragment extends Fragment {
 	public static String TAG = "ClothItemDetailsFragment";
@@ -97,35 +100,51 @@ public class ClothItemDetailsFragment extends Fragment {
 		});
 
 		Button bClothItemAddWashHistoryNow = getActivity().findViewById(R.id.bClothItemAddWashHistoryNow);
-		bClothItemAddWashHistoryNow.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				clothItem.addWashDate(new Date());
-				washHistoryAdapter.setWashHistory(clothItem.getWashHistory());
-				washHistoryAdapter.notifyDataSetChanged();
-			}
-		});
+		PushDownAnim.setPushDownAnimTo(bClothItemAddWashHistoryNow)
+				.setScale(0.80f)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						clothItem.addWashDate(new Date());
+						washHistoryAdapter.setWashHistory(clothItem.getWashHistory());
+						washHistoryAdapter.notifyDataSetChanged();
+					}
+				});
 
 		Button bClothItemAddWashHistory = getActivity().findViewById(R.id.bClothItemAddWashHistory);
-		bClothItemAddWashHistory.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				buildAddWashDateDialog();
-			}
-		});
+		PushDownAnim.setPushDownAnimTo(bClothItemAddWashHistory)
+				.setScale(0.80f)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						buildAddWashDateDialog();
+					}
+				});
+
+		Button bClothItemDelete = getActivity().findViewById(R.id.bClothItemDelete);
+		PushDownAnim.setPushDownAnimTo(bClothItemDelete)
+				.setScale(0.80f)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						buildDeleteDialog();
+					}
+				});
 
 		Button bClothItemEditSave = getActivity().findViewById(R.id.bClothItemEditSave);
-		bClothItemEditSave.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				clothItem.setName(etClothItemName.getText().toString());
-				clothItem.setBrand(etClothItemBrand.getText().toString());
-				Intent data = new Intent();
-				data.putExtra(CLOTHITEM_EXTRA_TAG, clothItem);
-				getActivity().setResult(RESULT_OK, data);
-				getActivity().finish();
-			}
-		});
+		PushDownAnim.setPushDownAnimTo(bClothItemEditSave)
+				.setScale(0.80f)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						clothItem.setName(etClothItemName.getText().toString());
+						clothItem.setBrand(etClothItemBrand.getText().toString());
+						Intent data = new Intent();
+						data.putExtra(CLOTHITEM_EXTRA_TAG, clothItem);
+						getActivity().setResult(RESULT_OK, data);
+						getActivity().finish();
+					}
+				});
 	}
 
 	private void buildChangeColorDialog() {
@@ -149,6 +168,27 @@ public class ClothItemDetailsFragment extends Fragment {
 			}
 		});
 		dialogAddWashDate.show();
+	}
+
+	private void buildDeleteDialog() {
+		AlertDialog.Builder dialogDelete = new AlertDialog.Builder(getActivity());
+		dialogDelete.setTitle("Delete ClothItem?");
+		dialogDelete.setPositiveButton("Yes, Delete", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent data = new Intent();
+				data.putExtra(DELETE_CLOTHITEM_ID_TAG, clothItem.getId());
+				getActivity().setResult(RESULT_CANCELED, data);
+				getActivity().finish();
+			}
+		});
+		dialogDelete.setNegativeButton("No JK!", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+
+			}
+		});
+		dialogDelete.show();
 	}
 
 	public void setClothItemColor(int color) {
