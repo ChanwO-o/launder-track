@@ -71,15 +71,17 @@
 			android:id="@+id/bClothItemAddWashHistoryNow"
 			android:layout_width="0dp"
 			android:layout_height="60dp"
-			android:text="Just Washed"
-			android:layout_weight="1" />
+			android:layout_weight="1"
+			android:background="#13FD08"
+			android:text="Just Washed" />
 
 		<Button
 			android:id="@+id/bClothItemAddWashHistory"
 			android:layout_width="0dp"
 			android:layout_height="60dp"
-			android:text="Add Another Date"
-			android:layout_weight="1" />
+			android:layout_weight="1"
+			android:background="#FBFF00"
+			android:text="Add Another Date" />
 
 	</LinearLayout>
 
@@ -91,15 +93,17 @@
 			android:id="@+id/bClothItemDelete"
 			android:layout_width="0dp"
 			android:layout_height="60dp"
-			android:text="Delete"
-			android:layout_weight="1" />
+			android:layout_weight="1"
+			android:background="#FF0000"
+			android:text="Delete" />
 
 		<Button
 			android:id="@+id/bClothItemEditSave"
 			android:layout_width="0dp"
 			android:layout_height="60dp"
-			android:text="Save"
-			android:layout_weight="1" />
+			android:layout_weight="1"
+			android:background="#08EBFD"
+			android:text="Save" />
 
 	</LinearLayout>
 
