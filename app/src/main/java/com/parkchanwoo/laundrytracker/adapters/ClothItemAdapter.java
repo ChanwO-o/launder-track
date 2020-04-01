@@ -13,6 +13,7 @@ import com.parkchanwoo.laundrytracker.R;
 import com.parkchanwoo.laundrytracker.models.ClothItem;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.ViewHolder> {
@@ -33,11 +34,19 @@ public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.View
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 		ClothItem clothItem = clothItems.get(position);
-		holder.tvClothItemName.setText(clothItems.get(position).getName());
+		holder.tvClothItemName.setText(clothItem.getName());
+		if (clothItem.getWashHistory().isEmpty())
+			holder.tvClothItemRecentWashDate.setText("--");
+		else {
+			Date date = clothItem.getRecentWashDate();
+			holder.tvClothItemRecentWashDate.setText(date.getMonth() + "/" + date.getDay() + "/" + date.getYear());
+		}
 		holder.itemView.setBackgroundColor(clothItem.getColor());
 		int BLACK = -16777216;
-		if (clothItem.getColor() == BLACK) // color selected is black
+		if (clothItem.getColor() == BLACK) { // color selected is black
 			holder.tvClothItemName.setTextColor(Color.WHITE);
+			holder.tvClothItemRecentWashDate.setTextColor(Color.WHITE);
+		}
 	}
 
 	@Override
@@ -59,11 +68,12 @@ public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.View
 	}
 
 	class ViewHolder extends RecyclerView.ViewHolder {
-		private TextView tvClothItemName;
+		private TextView tvClothItemName, tvClothItemRecentWashDate;
 
 		public ViewHolder(@NonNull View itemView) {
 			super(itemView);
 			tvClothItemName = itemView.findViewById(R.id.tvClothItemName);
+			tvClothItemRecentWashDate = itemView.findViewById(R.id.tvClothItemRecentWashDate);
 			itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

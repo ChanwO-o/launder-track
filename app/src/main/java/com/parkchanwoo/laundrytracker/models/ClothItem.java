@@ -4,6 +4,7 @@ import android.graphics.Color;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.UUID;
 
@@ -71,6 +72,13 @@ public class ClothItem implements Serializable {
 
 	public void addWashDate(Date date) {
 		washHistory.add(date);
+	}
+
+	public Date getRecentWashDate() {
+		if (washHistory.isEmpty())
+			return null;
+		Collections.sort(washHistory);
+		return washHistory.get(0);
 	}
 
 	/**
