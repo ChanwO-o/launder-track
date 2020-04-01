@@ -78,7 +78,7 @@ public class ClothItem implements Serializable {
 		if (washHistory.isEmpty())
 			return null;
 		Collections.sort(washHistory);
-		return washHistory.get(0);
+		return washHistory.get(washHistory.size() - 1);
 	}
 
 	/**
