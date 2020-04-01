@@ -13,8 +13,10 @@ import com.parkchanwoo.laundrytracker.R;
 import com.parkchanwoo.laundrytracker.models.ClothItem;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.ViewHolder> {
 	private List<ClothItem> clothItems;
@@ -38,8 +40,11 @@ public class ClothItemAdapter extends RecyclerView.Adapter<ClothItemAdapter.View
 		if (clothItem.getWashHistory().isEmpty())
 			holder.tvClothItemRecentWashDate.setText("--");
 		else {
+			Calendar cal = Calendar.getInstance(Locale.getDefault());
 			Date date = clothItem.getRecentWashDate();
-			holder.tvClothItemRecentWashDate.setText(date.getMonth() + "/" + date.getDay() + "/" + date.getYear());
+			cal.setTime(date);
+			String dateText = (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.DAY_OF_MONTH) + "/" + cal.get(Calendar.YEAR);
+			holder.tvClothItemRecentWashDate.setText(dateText);
 		}
 		holder.itemView.setBackgroundColor(clothItem.getColor());
 		int BLACK = -16777216;

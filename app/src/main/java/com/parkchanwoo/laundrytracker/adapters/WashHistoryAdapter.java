@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.parkchanwoo.laundrytracker.R;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class WashHistoryAdapter extends RecyclerView.Adapter<WashHistoryAdapter.ViewHolder> {
 	private List<Date> washHistory;
@@ -26,7 +28,11 @@ public class WashHistoryAdapter extends RecyclerView.Adapter<WashHistoryAdapter.
 
 	@Override
 	public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-		holder.tvWashDate.setText(washHistory.get(position).toString());
+		Date date = washHistory.get(position);
+		Calendar cal = Calendar.getInstance(Locale.getDefault());
+		cal.setTime(date);
+		String dateText = (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.DAY_OF_MONTH) + "/" + cal.get(Calendar.YEAR);
+		holder.tvWashDate.setText(dateText);
 	}
 
 	@Override
