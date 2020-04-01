@@ -44,10 +44,10 @@ public class MainActivity extends AppCompatActivity implements ColorPickerDialog
 		int id = item.getItemId();
 
 		if (id == R.id.menuSortByName) {
-
+			laundryViewModel.sortClothItemsByName();
 		}
 		else if (id == R.id.menuSortByDate) {
-
+			laundryViewModel.sortClothItemsByDate();
 		}
 		return super.onOptionsItemSelected(item);
 	}

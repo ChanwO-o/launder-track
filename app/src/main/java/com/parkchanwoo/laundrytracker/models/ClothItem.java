@@ -76,7 +76,7 @@ public class ClothItem implements Serializable {
 
 	public Date getRecentWashDate() {
 		if (washHistory.isEmpty())
-			return null;
+			return new Date(Long.MIN_VALUE); // needs to return some date object for sorting list, so just return minimum date possible
 		Collections.sort(washHistory);
 		return washHistory.get(washHistory.size() - 1);
 	}

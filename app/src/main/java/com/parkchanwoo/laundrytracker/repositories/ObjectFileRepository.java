@@ -13,6 +13,8 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ObjectFileRepository {
 	private String TAG = this.getClass().getSimpleName();
@@ -69,6 +71,32 @@ public class ObjectFileRepository {
 				temp.remove(ci);
 				break;
 			}
+		clothItemsLiveData.setValue(temp);
+		writeLaundry(temp);
+	}
+
+	public void sortClothItemsByName() {
+		ArrayList<ClothItem> temp = clothItemsLiveData.getValue();
+		Comparator<ClothItem> compareByName = new Comparator<ClothItem>() {
+			@Override
+			public int compare(ClothItem c1, ClothItem c2) {
+				return c1.getName().compareTo(c2.getName());
+			}
+		};
+		Collections.sort(temp, compareByName);
+		clothItemsLiveData.setValue(temp);
+		writeLaundry(temp);
+	}
+
+	public void sortClothItemsByDate() {
+		ArrayList<ClothItem> temp = clothItemsLiveData.getValue();
+		Comparator<ClothItem> compareByDate = new Comparator<ClothItem>() {
+			@Override
+			public int compare(ClothItem c1, ClothItem c2) {
+				return c1.getRecentWashDate().compareTo(c2.getRecentWashDate());
+			}
+		};
+		Collections.sort(temp, compareByDate);
 		clothItemsLiveData.setValue(temp);
 		writeLaundry(temp);
 	}

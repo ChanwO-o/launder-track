@@ -42,4 +42,12 @@ public class LaundryViewModel extends AndroidViewModel {
 	public void deleteClothItem(String clothItemId) {
 		objectFileRepository.deleteClothItem(clothItemId);
 	}
+
+	public void sortClothItemsByName() {
+		objectFileRepository.sortClothItemsByName();
+	}
+
+	public void sortClothItemsByDate() {
+		objectFileRepository.sortClothItemsByDate();
+	}
 }
