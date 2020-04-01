@@ -91,6 +91,9 @@ public class ClothItemListFragment extends Fragment {
 			ClothItem clothItem = (ClothItem) data.getSerializableExtra(EditClothItemActivity.CLOTHITEM_EXTRA_TAG);
 			laundryViewModel.updateClothItem(clothItem);
 		}
+		else if (data == null) { // nothing (user pressed back on edit activity)
+
+		}
 		else if (resultCode == RESULT_CANCELED) { // delete item
 			String clothItemId = data.getStringExtra(EditClothItemActivity.DELETE_CLOTHITEM_ID_TAG);
 			laundryViewModel.deleteClothItem(clothItemId);
